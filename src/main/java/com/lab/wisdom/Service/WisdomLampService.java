@@ -1,21 +1,24 @@
 package com.lab.wisdom.Service;
 
+import com.lab.wisdom.mapper.WisdomLampExtMapper;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.lab.wisdom.DTO.AccesstokenDTO;
 import com.lab.wisdom.DTO.ProductDTO;
-import okhttp3.*;
-
-import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
 import com.lab.wisdom.DTO.jsonAccepptDTO;
+import com.lab.wisdom.model.wisdomLamp;
+import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class WisdomLampService {
+    @Autowired
+    private WisdomLampExtMapper wisdomLampExtMapper;
+
     public String getToken(AccesstokenDTO accesstokenDTO){
         MediaType mediaType = MediaType.get("application/json;charset=utf-8");
         OkHttpClient client = new OkHttpClient();
@@ -46,12 +49,30 @@ public class WisdomLampService {
             String jsonstring = response.body().string();
             jsonAccepptDTO jsonAccepptDTO = JSON.parseObject(jsonstring, jsonAccepptDTO.class);
             ProductDTO productDTO = JSON.parseObject(jsonAccepptDTO.getAttr(), ProductDTO.class);
-            System.out.println(jsonAccepptDTO.getAttr());
             return productDTO;
         }catch (IOException e){
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    public List<ProductDTO> list() {
+        List<ProductDTO>productDTOS = new ArrayList<>();
+        List<wisdomLamp> limit = wisdomLampExtMapper.limit(10);
+        for (wisdomLamp wisdomLamp : limit) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setTime(wisdomLamp.getGmtCreate());
+            productDTO.setAir(wisdomLamp.getAir());
+            productDTO.setBuzzer_OnOff(wisdomLamp.getBuzzerOnoff());
+            productDTO.setHum(wisdomLamp.getHum());
+            productDTO.setIfRain(wisdomLamp.getIfrain());
+            productDTO.setLED_Value(wisdomLamp.getLedValue());
+            productDTO.setLED_OnOff(wisdomLamp.getLedOnoff());
+            productDTO.setTem(wisdomLamp.getTem());
+            productDTO.setSunValue(wisdomLamp.getSunvalue());
+            productDTOS.add(productDTO);
+        }
+        return productDTOS;
     }
 }
