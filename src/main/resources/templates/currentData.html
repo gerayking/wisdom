@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="javascript" src="js/bootstrap.min.js"></script>
+    <script type="javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/currentechart.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+</head>
+<body>
+<div th:insert="navigation::nav"></div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 main">
+                <h1 class="page-header">实时数据</h1>
+                <h2 class="sub-header">折线图</h2>
+                <div  class="col-md-3" id="Hum" style="width: 25%;height:200px;"></div>
+                <div  class="col-md-3" id="Tem" style="width: 25%;height:200px;"></div>
+                <div  class="col-md-3" id="sunValue" style="width: 25%;height:200px;"></div>
+                <div  class="col-md-3"id="LEDValue" style="width: 25%;height:200px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 main">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>LED_OnOff</th>
+                        <th>空气质量</th>
+                        <th>天气情况</th>
+                        <th>报警器</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td id="time"></td>
+                    <td id="led"></td>
+                    <td id="air"></td>
+                    <td id="rain"></td>
+                    <td id="buzzer"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
