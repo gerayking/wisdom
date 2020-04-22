@@ -37,7 +37,6 @@ public class searchdataController {
     @ResponseBody
     public void ExportExcel(@RequestParam(defaultValue = "appid") String appid, @RequestParam(defaultValue = "pass")String pass
             , HttpServletResponse response){
-        System.out.println(appid+" "+pass);
         List<wisdomLamp> wisdomLampList = wisdomLampMapper.selectByExample(new wisdomLampExample());
         List<Smartlamp> smartlampList = new ArrayList<>();
         for (wisdomLamp lamp : wisdomLampList) {
@@ -50,7 +49,6 @@ public class searchdataController {
             smartlamp.setAlarm_OnOff(lamp.getBuzzerOnoff());
             smartlamp.setAir(lamp.getAir());
             smartlamp.setDate(lamp.getGmtCreate());
-            System.out.println(smartlamp.toString());
             smartlampList.add(smartlamp);
         }
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("智慧灯杆", "智慧灯杆"), Smartlamp.class, smartlampList);

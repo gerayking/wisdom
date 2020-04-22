@@ -38,6 +38,18 @@ public class Schedule {
     public void recordAt0(){ restoreDate(); }
     private void restoreDate() {
         ProductDTO product = wisdomLampService.getProduct(AppId, did);
+        /*
+        * 判断设备是否在线，不在线则不插入数据库，否则影像数据可读性*/
+        if(product.getAir() == null ||
+           product.getHum() == null ||
+           product.getBuzzer_OnOff() == null ||
+           product.getIfRain() == null ||
+           product.getLED_OnOff() == null ||
+           product.getLED_Value() == null ||
+           product.getSunValue() == null ||
+           product.getTime() == null) {
+            return ;
+        }
         wisdomLamp record = new wisdomLamp();
         BeanUtils.copyProperties(product,record);
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.HH:00");
