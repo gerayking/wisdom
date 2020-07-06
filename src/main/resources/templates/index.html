@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SmartLamp</title>
     <script type="javascript" src="js/bootstrap.min.js"></script>
     <script type="javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/echarts.min.js"></script>
@@ -19,10 +19,14 @@
             <div class="col-md-12 main">
                 <h1 class="page-header">智慧灯杆性能展示</h1>
                 <h2 class="sub-header">折线图</h2>
-                <div  class="col-md-3" id="Hum" style="width: 25%;height:200px;"></div>
-                <div  class="col-md-3" id="Tem" style="width: 25%;height:200px;"></div>
-                <div  class="col-md-3" id="sunValue" style="width: 25%;height:200px;"></div>
-                <div  class="col-md-3"id="LED_Value" style="width: 25%;height:200px;"></div>
+                <div  class="col-md-12 col-md-6 col-sm-12 col-lg-12">
+                <div  class="col-md-6" id="Hum" style="height:200px;"></div>
+                <div  class="col-md-6" id="Tem" style="height:200px;"></div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-lg-12">
+                <div  class="col-md-6" id="sunValue" style="height:200px;"></div>
+                <div  class="col-md-6"id="LED_Value" style="height:200px;"></div>
+                </div>
                 <div class="col-md-12 table-responsive">
                     <h2 class="sub-header">列表</h2>
                     <table class="table table-striped">

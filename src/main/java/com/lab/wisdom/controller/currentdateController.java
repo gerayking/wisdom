@@ -4,10 +4,10 @@ import com.lab.wisdom.DTO.ProductDTO;
 import com.lab.wisdom.Service.WisdomLampService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.thymeleaf.util.LoggingUtils;
 
 import javax.servlet.http.HttpServletRequest;
 

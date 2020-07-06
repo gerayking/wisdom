@@ -8,6 +8,9 @@ import com.lab.wisdom.ExcelDTO.Smartlamp;
 import com.lab.wisdom.mapper.WisdomLampMapper;
 import com.lab.wisdom.model.wisdomLamp;
 import com.lab.wisdom.model.wisdomLampExample;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.ibatis.annotations.Param;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +27,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Api(tags="导出全部数据为Excel")
 @Controller
 public class searchdataController {
     @Autowired
     WisdomLampMapper wisdomLampMapper;
-    @GetMapping("/searchDate")
-    public  String callback(Model model, HttpServletRequest request){
-        request.getSession().setAttribute("section","searchData");
-        return "searchData";
-    }
-    @RequestMapping(value = "/ExportExcel",method = {RequestMethod.POST,RequestMethod.GET})
+    @ApiOperation("导出为excel")
+    @RequestMapping(value = "/ExportExcel",method = {RequestMethod.GET})
     @ResponseBody
-    public void ExportExcel(@RequestParam(defaultValue = "appid") String appid, @RequestParam(defaultValue = "pass")String pass
+    public void ExportExcel(@ApiParam("权限id(暂无验证)") String appid, @ApiParam("密码(暂无验证)") String pass
             , HttpServletResponse response){
         List<wisdomLamp> wisdomLampList = wisdomLampMapper.selectByExample(new wisdomLampExample());
         List<Smartlamp> smartlampList = new ArrayList<>();

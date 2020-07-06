@@ -19,6 +19,7 @@ public class WisdomLampService {
     @Autowired
     private WisdomLampExtMapper wisdomLampExtMapper;
 
+    //这个没用到，是获取token的
     public String getToken(AccesstokenDTO accesstokenDTO){
         MediaType mediaType = MediaType.get("application/json;charset=utf-8");
         OkHttpClient client = new OkHttpClient();
@@ -38,7 +39,9 @@ public class WisdomLampService {
         }
         return null;
     }
+    //获取当前数据并进行解析
     public ProductDTO getProduct(String appId,String did){
+        System.out.println("hear");
         Request request = new Request.Builder()
                 .url("https://api.gizwits.com/app/devdata/"+did+"/latest")
                 .header("X-Gizwits-Application-Id",appId)
@@ -53,13 +56,13 @@ public class WisdomLampService {
         }catch (IOException e){
             e.printStackTrace();
         }
-
         return null;
     }
 
-    public List<ProductDTO> list() {
+    //获查询数据库中的数据
+    public List<ProductDTO> list(int num) {
         List<ProductDTO>productDTOS = new ArrayList<>();
-        List<wisdomLamp> limit = wisdomLampExtMapper.limit(10);
+        List<wisdomLamp> limit = wisdomLampExtMapper.limit(num);
         for (wisdomLamp wisdomLamp : limit) {
             ProductDTO productDTO = new ProductDTO();
             productDTO.setTime(wisdomLamp.getGmtCreate());
@@ -70,6 +73,7 @@ public class WisdomLampService {
             productDTO.setLED_Value(wisdomLamp.getLedValue());
             productDTO.setLED_OnOff(wisdomLamp.getLedOnoff());
             productDTO.setTem(wisdomLamp.getTem());
+            productDTO.setGmtCreate(wisdomLamp.getGmtCreate());
             productDTO.setSunValue(wisdomLamp.getSunvalue());
             productDTOS.add(productDTO);
         }
